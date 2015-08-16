@@ -11,16 +11,25 @@
 </body>
 
 <script type="text/jsx">
+
 	// Define a class
 	var Badge = React.createClass({
 		render: function() {
 		return <button className="btn btn-primary" type="button">
-		  Messages <span className="badge">4</span>
+		  {this.props.title}<span className="badge">{this.props.number}</span>
 		</button>
 		}
 	});
+
+	// add data provider
+	var data = {
+		title: 'Inbox',
+		number: 32
+	}
+
 	// React will render the class
-	var element = React.createElement(Badge);
+	var element = React.createElement(Badge,data);
+	
 	// After rendering the class, place it inside body tags
 	React.render(element, document.body);
 </script>
