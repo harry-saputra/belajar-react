@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Widget</title>
+	<script src="https://fb.me/react-0.13.3.js"></script>
+	<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container"></div>
+</body>
+
+<script type="text/jsx">
+
+	// Define a class
+	var LinkButton = React.createClass({
+		render: function() {
+		return <a href={this.props.fbURL} ><button className="btn btn-primary" type="button">
+		  {this.props.title}
+		</button></a>
+		}
+	});
+
+	var Widget = React.createClass({
+		render: function() {
+			return <div className="col-sm-3"> 
+				<div className="thumbnail">
+			      <img src={this.props.imageURL} />
+			      <div className="caption">
+			        <h3>{this.props.title}</h3>
+			        <p>{this.props.description}</p>
+			        <LinkButton title="Go to Profile" fbURL={this.props.fbURL} />
+			      </div>
+			    </div>
+		    </div>
+		}
+	});
+
+	var WidgetList = React.createClass({
+		render: function() {
+
+			var list = this.props.WidgetData.map(function(WidgetProps){
+				return <Widget {...WidgetProps} />
+			});
+
+			return <div className="row">
+			{list}
+			</div>
+
+		}
+	});
+
+	// add data provider
+	var data = {
+		WidgetData: [{
+			title: 'Harry Saputra',
+			description: 'Front-end Developer & UI/UX Designer',
+			imageURL: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/11209611_10206373079343719_2227589996136499025_n.jpg?oh=04b82385e5dbf785775928b36d4de9dd&oe=56376D43&__gda__=1451026862_8ae749f92704ccfcca0b8502062ef284',
+			fbURL: 'http://facebook.com/harry.web'
+		},{
+			title: 'Rika Aprianti',
+			description: 'Fashion Designer ',
+			imageURL: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/11209611_10206373079343719_2227589996136499025_n.jpg?oh=04b82385e5dbf785775928b36d4de9dd&oe=56376D43&__gda__=1451026862_8ae749f92704ccfcca0b8502062ef284',
+			fbURL: 'http://facebook.com/harry.web'
+		},{
+			title: 'Abdurrahman',
+			description: 'Super Hero',
+			imageURL: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/11209611_10206373079343719_2227589996136499025_n.jpg?oh=04b82385e5dbf785775928b36d4de9dd&oe=56376D43&__gda__=1451026862_8ae749f92704ccfcca0b8502062ef284',
+			fbURL: 'http://facebook.com/harry.web'			
+		}]
+
+	};
+
+	// React will render the class
+	var element = React.createElement(WidgetList,data);
+	
+	// After rendering the class, place it inside body tags
+	React.render(element, document.querySelector('.container'));
+</script>
+
+</html>
